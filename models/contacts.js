@@ -1,4 +1,4 @@
-const fs = require('fs/promises');
+const fs = require("fs/promises");
 
 const path = require("path");
 
@@ -16,10 +16,10 @@ const getContactById = async (id) => {
   const contactsAll = await listContacts();
   const result = contactsAll.find((item) => item.id === contactId);
   return result || null;
-}
+};
 
 const removeContact = async (id) => {
-   const contactId = String(id);
+  const contactId = String(id);
   const contactsAll = await listContacts();
   const index = contactsAll.findIndex((item) => item.id === contactId);
   if (index === -1) {
@@ -28,7 +28,7 @@ const removeContact = async (id) => {
   const [result] = contactsAll.splice(index, 1);
   await fs.writeFile(contactsPath, JSON.stringify(contactsAll, null, 2));
   return result;
-}
+};
 
 const addContact = async (body) => {
   const contactsAll = await listContacts();
@@ -44,14 +44,14 @@ const addContact = async (body) => {
 const updateContact = async (id, body) => {
   const contactId = String(id);
   const contactsAll = await listContacts();
-  const index = contactsAll.findIndex(item => item.id === contactId);
+  const index = contactsAll.findIndex((item) => item.id === contactId);
   if (index === -1) {
     return null;
   }
   contactsAll[index] = { id, ...body };
   await fs.writeFile(contactsPath, JSON.stringify(contactsAll, null, 2));
   return contactsAll[index];
-}
+};
 
 module.exports = {
   listContacts,
@@ -59,4 +59,4 @@ module.exports = {
   removeContact,
   addContact,
   updateContact,
-}
+};
