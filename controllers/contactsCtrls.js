@@ -37,17 +37,14 @@ const addContactCtrls = async (req, res) => {
   
 }
 
-const removeContactCtrls = async (req, res, next) => {
-  try {
+const removeContactCtrls = async (req, res) => {
     const { id } = req.params;
     const result = await contacts.removeContact(id);
     if (!result) {
       throw HttpError(404, "Not found");
     }
     res.status(200).json({ message: "contact deleted" });
-  } catch (error) {
-    next(error);
-  }
+  
 }
 
 const updateContactCtrls = async (req, res, next) => {
@@ -71,6 +68,6 @@ module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
     getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
     addContactCtrls: ctrlWrapper(addContactCtrls),
-    removeContactCtrls,
+    removeContactCtrls: ctrlWrapper(removeContactCtrls),
     updateContactCtrls
 }
