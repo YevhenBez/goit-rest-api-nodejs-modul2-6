@@ -19,18 +19,7 @@ router.get("/", ctrl.listContactsCtrls);
 
 router.get("/:id", ctrl.getContactByIdCtrls);
 
-router.post("/", async (req, res, next) => {
-  try {
-    const { error } = addSchema.validate(req.body);
-    if (error) {
-      throw HttpError(400, `${error.message} : missing required name field`);
-    }
-    const result = await contacts.addContact(req.body);
-    res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
-});
+router.post("/", ctrl.addContactCtrls);
 
 router.delete("/:id", async (req, res, next) => {
   try {

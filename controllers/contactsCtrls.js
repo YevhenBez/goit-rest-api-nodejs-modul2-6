@@ -32,7 +32,21 @@ const getContactByIdCtrls = async (req, res, next) => {
   }
 }
 
+const addContactCtrls = async (req, res, next) => {
+  try {
+    const { error } = addSchema.validate(req.body);
+    if (error) {
+      throw HttpError(400, `${error.message} : missing required name field`);
+    }
+    const result = await contacts.addContact(req.body);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
     listContactsCtrls,
-    getContactByIdCtrls
+    getContactByIdCtrls,
+    addContactCtrls
 }
