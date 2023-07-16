@@ -18,16 +18,13 @@ const listContactsCtrls = async (req, res, next) => {
 }
 
 const getContactByIdCtrls = async (req, res, next) => {
-  try {
     const { id } = req.params;
     const result = await contacts.getContactById(id);
     if (!result) {
       throw HttpError(404, "Not found");
     }
     res.json(result);
-  } catch (error) {
-    next(error);
-  }
+  
 }
 
 const addContactCtrls = async (req, res, next) => {
@@ -75,7 +72,7 @@ const updateContactCtrls = async (req, res, next) => {
 
 module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
-    getContactByIdCtrls,
+    getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
     addContactCtrls,
     removeContactCtrls,
     updateContactCtrls
