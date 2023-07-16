@@ -1,28 +1,21 @@
 const express = require("express");
-// const Joi = require("joi");
-
-// const contacts = require("../../models/contacts");
-
-// const { HttpError } = require("../../helpers/HttpError");
 
 const ctrl = require("../../controllers/contactsCtrls");
 
-const router = express.Router();
+const  validateBody  = require("../../middlewares/validateBody");
 
-// const addSchema = Joi.object({
-//   name: Joi.string().required(),
-//   email: Joi.string().required(),
-//   phone: Joi.string().required(),
-// });
+const schemas = require("../../schemas/contactsSchemas");
+
+const router = express.Router();
 
 router.get("/", ctrl.listContactsCtrls);
 
 router.get("/:id", ctrl.getContactByIdCtrls);
 
-router.post("/", ctrl.addContactCtrls);
+router.post("/", validateBody(schemas.addSchema), ctrl.addContactCtrls);
 
 router.delete("/:id", ctrl.removeContactCtrls);
 
-router.put("/:id", ctrl.updateContactCtrls);
+router.put("/:id", validateBody(schemas.addSchema), ctrl.updateContactCtrls);
 
 module.exports = router;
