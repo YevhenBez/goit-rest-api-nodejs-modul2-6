@@ -47,8 +47,7 @@ const removeContactCtrls = async (req, res) => {
   
 }
 
-const updateContactCtrls = async (req, res, next) => {
-  try {
+const updateContactCtrls = async (req, res) => {
     const { error } = addSchema.validate(req.body);
     if (error) {
       throw HttpError(400, `${error.message} : missing fields`);
@@ -59,9 +58,7 @@ const updateContactCtrls = async (req, res, next) => {
       throw HttpError(404, "Not found");
     }
     res.status(200).json(result);
-  } catch (error) {
-    next(error);
-  }
+ 
 }
 
 module.exports = {
@@ -69,5 +66,5 @@ module.exports = {
     getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
     addContactCtrls: ctrlWrapper(addContactCtrls),
     removeContactCtrls: ctrlWrapper(removeContactCtrls),
-    updateContactCtrls
+    updateContactCtrls: ctrlWrapper(updateContactCtrls),
 }
