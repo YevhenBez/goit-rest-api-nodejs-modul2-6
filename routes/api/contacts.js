@@ -17,18 +17,7 @@ const router = express.Router();
 
 router.get("/", ctrl.listContactsCtrls);
 
-router.get("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const result = await contacts.getContactById(id);
-    if (!result) {
-      throw HttpError(404, "Not found");
-    }
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get("/:id", ctrl.getContactByIdCtrls);
 
 router.post("/", async (req, res, next) => {
   try {
