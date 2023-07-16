@@ -3,7 +3,7 @@ const Joi = require("joi");
 const contacts = require("../models/contacts");
 
 const { HttpError } = require("../helpers/HttpError");
-const { ctrlWrapper } = require("../helpers/ctrlWrapper");
+const ctrlWrapper  = require("../helpers/ctrlWrapper");
 
 const addSchema = Joi.object({
   name: Joi.string().required(),
@@ -11,13 +11,13 @@ const addSchema = Joi.object({
   phone: Joi.string().required(),
 });
 
-const listContactsCtrls = async (req, res, next) => {
+const listContactsCtrls = async (req, res) => {
     const result = await contacts.listContacts();
     res.status(200).json(result);
   
 }
 
-const getContactByIdCtrls = async (req, res, next) => {
+const getContactByIdCtrls = async (req, res) => {
     const { id } = req.params;
     const result = await contacts.getContactById(id);
     if (!result) {
@@ -27,17 +27,14 @@ const getContactByIdCtrls = async (req, res, next) => {
   
 }
 
-const addContactCtrls = async (req, res, next) => {
-  try {
+const addContactCtrls = async (req, res) => {
     const { error } = addSchema.validate(req.body);
     if (error) {
       throw HttpError(400, `${error.message} : missing required name field`);
     }
     const result = await contacts.addContact(req.body);
     res.status(201).json(result);
-  } catch (error) {
-    next(error);
-  }
+  
 }
 
 const removeContactCtrls = async (req, res, next) => {
@@ -73,7 +70,7 @@ const updateContactCtrls = async (req, res, next) => {
 module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
     getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
-    addContactCtrls,
+    addContactCtrls: ctrlWrapper(addContactCtrls),
     removeContactCtrls,
     updateContactCtrls
 }
