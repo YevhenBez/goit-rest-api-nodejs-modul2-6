@@ -21,18 +21,7 @@ router.get("/:id", ctrl.getContactByIdCtrls);
 
 router.post("/", ctrl.addContactCtrls);
 
-router.delete("/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const result = await contacts.removeContact(id);
-    if (!result) {
-      throw HttpError(404, "Not found");
-    }
-    res.status(200).json({ message: "contact deleted" });
-  } catch (error) {
-    next(error);
-  }
-});
+router.delete("/:id", ctrl.removeContactCtrls);
 
 router.put("/:id", async (req, res, next) => {
   try {
