@@ -58,9 +58,27 @@ const removeContactCtrls = async (req, res, next) => {
   }
 }
 
+const updateContactCtrls = async (req, res, next) => {
+  try {
+    const { error } = addSchema.validate(req.body);
+    if (error) {
+      throw HttpError(400, `${error.message} : missing fields`);
+    }
+    const { id } = req.params;
+    const result = await contacts.updateContact(id, req.body);
+    if (!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
     listContactsCtrls,
     getContactByIdCtrls,
     addContactCtrls,
-    removeContactCtrls
+    removeContactCtrls,
+    updateContactCtrls
 }
