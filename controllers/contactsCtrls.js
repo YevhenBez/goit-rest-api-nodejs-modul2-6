@@ -2,7 +2,7 @@
 
 const { ContactMongoose } = require("../models/contacts");
 
-// const { HttpError } = require("../helpers/HttpError");    ЭТО НУЖНО!!!!!!
+const { HttpError } = require("../helpers/HttpError");
 const ctrlWrapper  = require("../helpers/ctrlWrapper");
 
 const listContactsCtrls = async (req, res) => {
@@ -11,15 +11,15 @@ const listContactsCtrls = async (req, res) => {
   
 }
 
-// const getContactByIdCtrls = async (req, res) => {
-//     const { id } = req.params;
-//     const result = await contacts.getContactById(id);
-//     if (!result) {
-//       throw HttpError(404, "Not found");
-//     }
-//     res.json(result);
+const getContactByIdCtrls = async (req, res) => {
+    const { id } = req.params;
+    const result = await ContactMongoose.findById(id);
+    if (!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.json(result);
   
-// }
+}
 
 const addContactCtrls = async (req, res) => {
    
@@ -51,7 +51,7 @@ const addContactCtrls = async (req, res) => {
 
 module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
-    // getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
+    getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
     addContactCtrls: ctrlWrapper(addContactCtrls),
     // removeContactCtrls: ctrlWrapper(removeContactCtrls),
     // updateContactCtrls: ctrlWrapper(updateContactCtrls),
