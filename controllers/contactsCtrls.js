@@ -28,15 +28,15 @@ const addContactCtrls = async (req, res) => {
   
 }
 
-// const removeContactCtrls = async (req, res) => {
-//     const { id } = req.params;
-//     const result = await contacts.removeContact(id);
-//     if (!result) {
-//       throw HttpError(404, "Not found");
-//     }
-//     res.status(200).json({ message: "contact deleted" });
+const removeContactCtrls = async (req, res) => {
+    const { id } = req.params;
+    const result = await ContactMongoose.findByIdAndRemove(id);
+    if (!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.status(200).json({ message: "contact deleted" });
   
-// }
+}
 
 const updateContactCtrls = async (req, res) => {
     
@@ -64,7 +64,7 @@ module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
     getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
     addContactCtrls: ctrlWrapper(addContactCtrls),
-    // removeContactCtrls: ctrlWrapper(removeContactCtrls),
+    removeContactCtrls: ctrlWrapper(removeContactCtrls),
     updateContactCtrls: ctrlWrapper(updateContactCtrls),
     updateStatusContactCtrls: ctrlWrapper(updateStatusContactCtrls),
 }
