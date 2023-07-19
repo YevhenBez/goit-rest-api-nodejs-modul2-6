@@ -38,21 +38,21 @@ const addContactCtrls = async (req, res) => {
   
 // }
 
-// const updateContactCtrls = async (req, res) => {
+const updateContactCtrls = async (req, res) => {
     
-//     const { id } = req.params;
-//     const result = await contacts.updateContact(id, req.body);
-//     if (!result) {
-//       throw HttpError(404, "Not found");
-//     }
-//     res.status(200).json(result);
+    const { id } = req.params;
+    const result = await ContactMongoose.findByIdAndUpdate(id, req.body, {new: true});
+    if (!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.status(200).json(result);
  
-// }
+}
 
 module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
     getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
     addContactCtrls: ctrlWrapper(addContactCtrls),
     // removeContactCtrls: ctrlWrapper(removeContactCtrls),
-    // updateContactCtrls: ctrlWrapper(updateContactCtrls),
+    updateContactCtrls: ctrlWrapper(updateContactCtrls),
 }
