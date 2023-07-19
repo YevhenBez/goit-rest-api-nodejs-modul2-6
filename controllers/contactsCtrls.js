@@ -1,5 +1,3 @@
-// const contacts = require("../models/contacts");
-
 const { ContactMongoose } = require("../models/contacts");
 
 const { HttpError } = require("../helpers/HttpError");
