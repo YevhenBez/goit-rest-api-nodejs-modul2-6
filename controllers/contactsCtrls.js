@@ -1,7 +1,7 @@
 const { ContactMongoose } = require("../models");
 
 const { HttpError } = require("../helpers");
-const ctrlWrapper = require("../helpers/ctrlWrapper");
+const { ctrlWrapper } = require("../helpers");
 
 const listContactsCtrls = async (req, res) => {
   const result = await ContactMongoose.find();
