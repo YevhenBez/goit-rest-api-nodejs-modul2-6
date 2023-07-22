@@ -1,4 +1,4 @@
-const { ContactMongoose } = require("../models/contacts");
+const { ContactMongoose } = require("../models");
 
 const { HttpError } = require("../helpers");
 const ctrlWrapper = require("../helpers/ctrlWrapper");
