@@ -6,7 +6,7 @@ const { validateBody } = require("../../middlewares");
 
 const { isValidId }  = require("../../middlewares");
 
-const { schemas } = require("../../models/contacts");
+const { schemas } = require("../../schemas/joi");
 
 const router = express.Router();
 
