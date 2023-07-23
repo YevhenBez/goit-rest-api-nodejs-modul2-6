@@ -2,7 +2,7 @@ const express = require("express");
 
 const ctrl = require("../../controllers");
 
-const validateBody = require("../../middlewares/validateBody");
+const { validateBody } = require("../../middlewares");
 
 const { isValidId }  = require("../../middlewares");
 
