@@ -4,7 +4,7 @@ const ctrl = require("../../controllers");
 
 const validateBody = require("../../middlewares/validateBody");
 
-const isValidId = require("../../middlewares/isValidId");
+const { isValidId }  = require("../../middlewares");
 
 const { schemas } = require("../../models/contacts");
 
