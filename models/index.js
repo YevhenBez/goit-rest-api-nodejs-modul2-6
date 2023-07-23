@@ -1,4 +1,4 @@
-const { ContactMongoose } = require("../models/contacts");
+const { ContactMongoose } = require("./contacts");
 
 module.exports = {
   ContactMongoose,

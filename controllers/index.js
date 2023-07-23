@@ -1,16 +1,16 @@
 const { ctrlWrapper } = require("../helpers");
 
-const listContactsCtrls = require("../controllers/listContactsCtrls");
+const listContactsCtrls = require("./listContactsCtrls");
 
-const getContactByIdCtrls = require("../controllers/getContactByIdCtrls");
+const getContactByIdCtrls = require("./getContactByIdCtrls");
 
-const addContactCtrls = require("../controllers/addContactCtrls");
+const addContactCtrls = require("./addContactCtrls");
 
-const removeContactCtrls = require("../controllers/removeContactCtrls");
+const removeContactCtrls = require("./removeContactCtrls");
 
-const updateContactCtrls = require("../controllers/updateContactCtrls");
+const updateContactCtrls = require("./updateContactCtrls");
 
-const updateStatusContactCtrls = require("../controllers/updateStatusContactCtrls");
+const updateStatusContactCtrls = require("./updateStatusContactCtrls");
 
 module.exports = {
     listContactsCtrls: ctrlWrapper(listContactsCtrls),
