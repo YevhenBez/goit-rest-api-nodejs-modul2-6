@@ -13,10 +13,10 @@ const updateContactCtrls = require("./updateContactCtrls");
 const updateStatusContactCtrls = require("./updateStatusContactCtrls");
 
 module.exports = {
-    listContactsCtrls: ctrlWrapper(listContactsCtrls),
-    getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
-    addContactCtrls: ctrlWrapper(addContactCtrls),
-    removeContactCtrls: ctrlWrapper(removeContactCtrls),
-    updateContactCtrls: ctrlWrapper(updateContactCtrls),
-    updateStatusContactCtrls: ctrlWrapper(updateStatusContactCtrls),
+  listContactsCtrls: ctrlWrapper(listContactsCtrls),
+  getContactByIdCtrls: ctrlWrapper(getContactByIdCtrls),
+  addContactCtrls: ctrlWrapper(addContactCtrls),
+  removeContactCtrls: ctrlWrapper(removeContactCtrls),
+  updateContactCtrls: ctrlWrapper(updateContactCtrls),
+  updateStatusContactCtrls: ctrlWrapper(updateStatusContactCtrls),
 };
