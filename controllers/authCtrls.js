@@ -59,7 +59,23 @@ const login = async (req, res) => {
     })
 }
 
+const getCurrent = async (req, res) => {
+    const { email, name } = req.user;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        throw HttpError(401, "Not authorized");
+    }
+
+    res.status(200).json({
+        name,
+        email,
+        subscription: user.subscription,
+    })
+}
+
 module.exports = {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
+    getCurrent: ctrlWrapper(getCurrent),
 };
