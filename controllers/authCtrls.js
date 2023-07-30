@@ -12,7 +12,7 @@ const dotenv = require("dotenv");
 
 const { User } = require("../models/user");
 
-const { HttpError, ctrlWrapper } = require("../helpers");
+const { HttpError, ctrlWrapper, resizeImage } = require("../helpers");
 
 dotenv.config();
 
@@ -110,6 +110,9 @@ const updateAvatar = async (req, res) => {
   }
 
   const { path: tempUpload, originalname } = req.file;
+
+  await resizeImage(tempUpload);
+
   const filename = `${_id}_${originalname}`;
   const resultUpload = path.join(avatarsDir, filename);
 
