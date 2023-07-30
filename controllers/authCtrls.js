@@ -32,7 +32,11 @@ const register = async (req, res) => {
 
   const avatarURL = gravatar.url(email);
 
-  const newUser = await User.create({ ...req.body, password: hashPassword, avatarURL});
+  const newUser = await User.create({
+    ...req.body,
+    password: hashPassword,
+    avatarURL,
+  });
 
   res.status(201).json({
     email: newUser.email,
@@ -125,7 +129,7 @@ const updateAvatar = async (req, res) => {
   res.status(200).json({
     avatarURL,
   });
-}
+};
 
 module.exports = {
   register: ctrlWrapper(register),
