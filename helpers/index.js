@@ -6,9 +6,12 @@ const handleMongooseError = require("./handleMongooseError");
 
 const resizeImage = require("./resizeImageJimp");
 
+const sendEmail = require("./sendEmail");
+
 module.exports = {
   HttpError,
   ctrlWrapper,
   handleMongooseError,
   resizeImage,
+  sendEmail,
 };
