@@ -42,8 +42,8 @@ const userSchema = new Schema(
     },
     verificationCode: {
       type: String,
-      default: ""
-    }
+      default: "",
+    },
   },
   { versionKey: false }
 );
@@ -59,7 +59,7 @@ const registerSchema = Joi.object({
 
 const emailSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
-})
+});
 
 const loginSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
