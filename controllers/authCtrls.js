@@ -8,6 +8,8 @@ const path = require("path");
 
 const fs = require("fs/promises");
 
+const { nanoid } = require("nanoid");
+
 const dotenv = require("dotenv");
 
 const { User } = require("../models/user");
@@ -32,10 +34,13 @@ const register = async (req, res) => {
 
   const avatarURL = gravatar.url(email);
 
+  const verificationCode = nanoid();
+
   const newUser = await User.create({
     ...req.body,
     password: hashPassword,
     avatarURL,
+    verificationCode
   });
 
   res.status(201).json({
