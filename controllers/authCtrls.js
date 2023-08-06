@@ -14,11 +14,11 @@ const dotenv = require("dotenv");
 
 const { User } = require("../models/user");
 
-const { HttpError, ctrlWrapper, resizeImage } = require("../helpers");
+const { HttpError, ctrlWrapper, resizeImage, sendEmail } = require("../helpers");
 
 dotenv.config();
 
-const { SECRET_KEY } = process.env;
+const { SECRET_KEY, BASE_URL} = process.env;
 
 const avatarsDir = path.join(__dirname, "../", "public", "avatars");
 
@@ -42,6 +42,14 @@ const register = async (req, res) => {
     avatarURL,
     verificationCode
   });
+
+  const verifyEmail = {
+    to: email,
+    subject: "Verify email",
+    html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationCode}">Click verify email</a>`
+  };
+
+  await sendEmail(verifyEmail);
 
   res.status(201).json({
     email: newUser.email,
